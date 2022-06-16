@@ -381,6 +381,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    фильтрация комнат по этажам через get параметры:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     Фильтрация и диапазон номеров комнат:
   </a>
@@ -388,8 +395,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#get_1" class="md-nav__link">
+    фильтрация и диапазон комнат через get параметры:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     Фильтрация номеров по этажу и типу комнаты:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_2" class="md-nav__link">
+    фильтрация номеров по этажу и типу комнаты через get параметры:
   </a>
   
 </li>
@@ -626,6 +647,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    фильтрация комнат по этажам через get параметры:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     Фильтрация и диапазон номеров комнат:
   </a>
@@ -633,8 +661,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#get_1" class="md-nav__link">
+    фильтрация и диапазон комнат через get параметры:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     Фильтрация номеров по этажу и типу комнаты:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_2" class="md-nav__link">
+    фильтрация номеров по этажу и типу комнаты через get параметры:
   </a>
   
 </li>
@@ -678,6 +720,21 @@
         return queryset
 </code></pre>
 <p><img alt="" src="../../imgs/filter1.png" /></p>
+<h3 id="get">фильтрация комнат по этажам через get параметры:</h3>
+<pre><code class="language-python">class RoomFloorFilterView(ListAPIView):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = self.queryset
+
+        floor = self.request.query_params.get('floor')
+        if floor:
+            queryset = queryset.filter(floor=floor)
+        return queryset
+</code></pre>
+<p><img alt="" src="../imgs/filret1_updated.jpg.png" /></p>
 <h3 id="_3">Фильтрация и диапазон номеров комнат:</h3>
 <pre><code class="language-python">class RoomNumbersFilterView(ListAPIView):
     queryset = Room.objects.all()
@@ -689,6 +746,23 @@
         return queryset
 </code></pre>
 <p><img alt="" src="../../imgs/filter2.jpg" /></p>
+<h3 id="get_1">фильтрация и диапазон комнат через get параметры:</h3>
+<pre><code class="language-python">class RoomNumbersFilterView(ListAPIView):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+    permission_classes = [IsAuthenticated]
+    pagination_class = PageNumberPagination
+
+    def get_queryset(self):
+        queryset = Room.objects.all()
+        number__gte = self.request.query_params.get('num_g')
+        number__lte = self.request.query_params.get('num_l')
+
+        if number__gte and number__lte:
+            queryset = queryset.filter(number__gte=number__gte, number__lte=number__lte)
+        return queryset
+</code></pre>
+<p><img alt="" src="../imgs/filret2_updated.jpg.png" /></p>
 <h3 id="_4">Фильтрация номеров по этажу и типу комнаты:</h3>
 <pre><code class="language-python">class RoomFloorRoomTypeFilterView(ListAPIView):
     queryset = Room.objects.all()
@@ -703,6 +777,27 @@
         return queryset
 </code></pre>
 <p><img alt="" src="../../imgs/filter3.jpg" /></p>
+<h3 id="get_2">фильтрация номеров по этажу и типу комнаты через get параметры:</h3>
+<pre><code class="language-python">class RoomFloorRoomTypeFilterView(ListAPIView):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+
+    # permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = self.queryset.all()
+        if not self.request.user.is_anonymous:
+            floor = self.request.query_params.get('floor')
+            room_type = self.request.query_params.get('room_type')
+            if floor:
+                queryset = queryset.filter(floor=floor)
+
+            if room_type:
+                queryset = queryset.filter(room_type=room_type)
+
+        return queryset
+</code></pre>
+<p><img alt="" src="../imgs/filret3_updated.jpg.png" /></p>
 
               
             </article>
