@@ -375,6 +375,13 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    обновленные эндпоинты:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     Фильтрация комнат по этажам:
   </a>
   
@@ -388,7 +395,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     Фильтрация и диапазон номеров комнат:
   </a>
   
@@ -402,7 +409,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     Фильтрация номеров по этажу и типу комнаты:
   </a>
   
@@ -641,6 +648,13 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    обновленные эндпоинты:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     Фильтрация комнат по этажам:
   </a>
   
@@ -654,7 +668,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     Фильтрация и диапазон номеров комнат:
   </a>
   
@@ -668,7 +682,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     Фильтрация номеров по этажу и типу комнаты:
   </a>
   
@@ -709,7 +723,12 @@
     path('rooms/number/&lt;int:num_g&gt;/&lt;int:num_l&gt;/', RoomNumbersFilterView.as_view()),
     path('rooms/floor-room-type/&lt;int:floor&gt;/&lt;int:room_type&gt;/', RoomFloorRoomTypeFilterView.as_view())
 </code></pre>
-<h3 id="_2">Фильтрация комнат по этажам:</h3>
+<h3 id="_2">обновленные эндпоинты:</h3>
+<pre><code class="language-python">    path('rooms/floor/', RoomFloorFilterView.as_view()),
+    path('rooms/number/', RoomNumbersFilterView.as_view()),
+    path('rooms/floor-room-type/', RoomFloorRoomTypeFilterView.as_view())
+</code></pre>
+<h3 id="_3">Фильтрация комнат по этажам:</h3>
 <pre><code class="language-python">class RoomFloorFilterView(ListAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
@@ -735,7 +754,7 @@
         return queryset
 </code></pre>
 <p><img alt="" src="../../imgs/filret1_updated.jpg" /></p>
-<h3 id="_3">Фильтрация и диапазон номеров комнат:</h3>
+<h3 id="_4">Фильтрация и диапазон номеров комнат:</h3>
 <pre><code class="language-python">class RoomNumbersFilterView(ListAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
@@ -763,7 +782,7 @@
         return queryset
 </code></pre>
 <p><img alt="" src="../../imgs/filret2_updated.jpg" /></p>
-<h3 id="_4">Фильтрация номеров по этажу и типу комнаты:</h3>
+<h3 id="_5">Фильтрация номеров по этажу и типу комнаты:</h3>
 <pre><code class="language-python">class RoomFloorRoomTypeFilterView(ListAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
