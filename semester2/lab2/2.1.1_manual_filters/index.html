@@ -734,7 +734,7 @@
             queryset = queryset.filter(floor=floor)
         return queryset
 </code></pre>
-<p><img alt="" src="../imgs/filret1_updated.jpg.png" /></p>
+<p><img alt="" src="../../imgs/filret1_updated.jpg" /></p>
 <h3 id="_3">Фильтрация и диапазон номеров комнат:</h3>
 <pre><code class="language-python">class RoomNumbersFilterView(ListAPIView):
     queryset = Room.objects.all()
@@ -762,7 +762,7 @@
             queryset = queryset.filter(number__gte=number__gte, number__lte=number__lte)
         return queryset
 </code></pre>
-<p><img alt="" src="../imgs/filret2_updated.jpg.png" /></p>
+<p><img alt="" src="../../imgs/filret2_updated.jpg" /></p>
 <h3 id="_4">Фильтрация номеров по этажу и типу комнаты:</h3>
 <pre><code class="language-python">class RoomFloorRoomTypeFilterView(ListAPIView):
     queryset = Room.objects.all()
@@ -797,7 +797,7 @@
 
         return queryset
 </code></pre>
-<p><img alt="" src="../imgs/filret3_updated.jpg.png" /></p>
+<p><img alt="" src="../../imgs/filret3_updated.jpg" /></p>
 
               
             </article>
